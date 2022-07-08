@@ -53,7 +53,7 @@ class CommandActor:  # pragma: no cover
 
 
         left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
-        self.cmd[-1] = left + "$TORCHX_RANK0_HOST:49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
+        self.cmd[-1] = "MASTER_ADDR=" + str(self.master_addr) + " MASTER_PORT=" + str(self.master_port)+ " " +left + "$TORCHX_RANK0_HOST:49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
 
         #self.cmd.append(" --master_addr " + self.master_addr)
         #self.cmd.append(" --master_port " + str(self.master_port))
@@ -130,7 +130,7 @@ def create_command_actors(
         cmd_actors.append(actor)
 
         if i == 0:
-            rank_0_address = os.getenv("MY_POD_IP","localhost")
+            rank_0_address = "localhost"
             rank_0_port = 0
         else:
             rank_0_address, rank_0_port = ray.get(
