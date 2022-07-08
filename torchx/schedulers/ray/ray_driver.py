@@ -53,10 +53,12 @@ class CommandActor:  # pragma: no cover
 
         print("command actor: exec_module: ", worker_evn)
 
-        self.cmd += " --master_addr " + self.master_addr
-        self.cmd += "--master_port " + str(self.master_port)
+        left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
+        self.cmd[-1] = left + "$TORCHX_RANK0_HOST:49782" + right
 
-        print(self.cmd)
+        self.cmd.append(" --master_addr " + self.master_addr)
+        self.cmd.append(" --master_port " + str(self.master_port))
+
 
         popen = subprocess.Popen(self.cmd, env=worker_evn)
 
