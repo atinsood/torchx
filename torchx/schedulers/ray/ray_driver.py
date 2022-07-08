@@ -53,10 +53,10 @@ class CommandActor:  # pragma: no cover
 
 
         left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
-        self.cmd[-1] = left + "$TORCHX_RANK0_HOST:49782" + right
+        self.cmd[-1] = left + "$TORCHX_RANK0_HOST:49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
 
-        self.cmd.append(" --master_addr " + self.master_addr)
-        self.cmd.append(" --master_port " + str(self.master_port))
+        #self.cmd.append(" --master_addr " + self.master_addr)
+        #self.cmd.append(" --master_port " + str(self.master_port))
 
         print(self.cmd)
         print(worker_evn)
