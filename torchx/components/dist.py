@@ -139,10 +139,7 @@ def ddp(
 
     if env is None:
         env = {}
-    env.setdefault("LOGLEVEL", os.getenv("LOGLEVEL", "WARNING"))
-    env.setdefault("MASTER_ADDR", str(os.getenv("MASTER_ADDR")))
-    env.setdefault("MASTER_PORT", str(os.getenv("MASTER_PORT")))
-
+    env.setdefault("LOGLEVEL", os.getenv("LOGLEVEL", "DEBUG"))
 
     cmd = [
         "python",
