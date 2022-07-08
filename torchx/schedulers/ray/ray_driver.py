@@ -51,7 +51,6 @@ class CommandActor:  # pragma: no cover
         worker_evn.update(self.env)
         worker_evn[TORCHX_RANK0_HOST] = self.master_addr
 
-        print("command actor: exec_module: ", worker_evn)
 
         left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
         self.cmd[-1] = left + "$TORCHX_RANK0_HOST:49782" + right
@@ -59,7 +58,8 @@ class CommandActor:  # pragma: no cover
         self.cmd.append(" --master_addr " + self.master_addr)
         self.cmd.append(" --master_port " + str(self.master_port))
 
-
+        print(self.cmd)
+        print(worker_evn)
         popen = subprocess.Popen(self.cmd, env=worker_evn)
 
         returncode = popen.wait()
