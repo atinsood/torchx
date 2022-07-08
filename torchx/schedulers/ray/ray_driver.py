@@ -130,7 +130,7 @@ def create_command_actors(
         cmd_actors.append(actor)
 
         if i == 0:
-            rank_0_address = "localhost"
+            rank_0_address = os.getenv("MY_POD_IP","localhost")
             rank_0_port = 0
         else:
             rank_0_address, rank_0_port = ray.get(
