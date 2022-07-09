@@ -54,7 +54,7 @@ class CommandActor:  # pragma: no cover
 
         left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
         #replace TORCHX_RANK0_HOST for now
-        self.cmd[-1] = "MASTER_ADDR=" + str(self.master_addr) + " MASTER_PORT=" + str(self.master_port)+ " " +left + str(self.master_addr)+":49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
+        self.cmd[-1] = "TORCH_DISTRIBUTED_DEBUG=DETAIL" + " MASTER_ADDR=" + str(self.master_addr) + " MASTER_PORT=" + str(self.master_port)+ " " +left + str(self.master_addr)+":49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
 
         #self.cmd.append(" --master_addr " + self.master_addr)
         #self.cmd.append(" --master_port " + str(self.master_port))
