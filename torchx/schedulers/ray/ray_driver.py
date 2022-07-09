@@ -59,8 +59,8 @@ class CommandActor:  # pragma: no cover
         #self.cmd.append(" --master_addr " + self.master_addr)
         #self.cmd.append(" --master_port " + str(self.master_port))
 
-        print(self.cmd)
-        print(worker_evn)
+        print("cmd:", self.cmd)
+        print("worker env:", worker_evn)
         popen = subprocess.Popen(self.cmd, env=worker_evn)
 
         returncode = popen.wait()
@@ -145,7 +145,7 @@ def create_command_actors(
 
 def main() -> None:  # pragma: no cover
     actors: List[RayActor] = load_actor_json("actors.json")
-    print(actors)
+    print("acrtors:", actors)
     # pyre-fixme[16]: Module `worker` has no attribute `init`.
     ray.init(address="auto", namespace="torchx-ray")
     pg: PlacementGroup = create_placement_group(actors)
