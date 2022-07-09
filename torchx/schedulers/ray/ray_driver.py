@@ -28,7 +28,7 @@ except ModuleNotFoundError:
     from torchx.schedulers.ray.ray_common import RayActor, TORCHX_RANK0_HOST
 
 _logger: logging.Logger = logging.getLogger(__name__)
-_logger.setLevel(logging.getLevelName(os.environ.get("LOGLEVEL", "INFO")))
+_logger.setLevel(logging.getLevelName(os.environ.get("LOGLEVEL", "DEBUG")))
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 
 

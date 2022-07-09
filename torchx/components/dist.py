@@ -140,7 +140,8 @@ def ddp(
     if env is None:
         env = {}
     env.setdefault("LOGLEVEL", os.getenv("LOGLEVEL", "DEBUG"))
-
+    print("environemnt before exec ddp from torchx", env)    
+    
     cmd = [
         "python",
         "-m",
