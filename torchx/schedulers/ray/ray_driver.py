@@ -132,7 +132,7 @@ def create_command_actors(
 
         if i == 0:
             rank_0_address = "localhost"
-            rank_0_port = 0
+            rank_0_port = 49782
         else:
             rank_0_address, rank_0_port = ray.get(
                 # pyre-ignore[16]
