@@ -137,7 +137,7 @@ def ddp(
     else:
         rdzv_endpoint = _noquote(f"$${macros.rank0_env}:{rdzv_port}")
 
-    rdzv_endpoint = "etcd-service.codeflare.svc:2379"
+    #rdzv_endpoint = "etcd-service.codeflare.svc:2379"
 
     if env is None:
         env = {}
