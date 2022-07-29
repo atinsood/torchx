@@ -129,7 +129,7 @@ def ddp(
     else:
         raise ValueError("failed to compute role_name")
 
-    rdzv_backend = "etcd"
+    rdzv_backend = "static"
     if nnodes == 1:
         # using port 0 makes elastic chose a free random port which is ok
         # for single-node jobs since all workers run under a single agent
