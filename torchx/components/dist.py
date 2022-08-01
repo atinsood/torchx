@@ -159,6 +159,7 @@ def ddp(
         str(nnodes),
         "--nproc_per_node",
         str(nproc_per_node),
+        "--node_rank", macros.replica_id,
         "--tee",
         "3",
         "--role",
