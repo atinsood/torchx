@@ -131,13 +131,14 @@ def create_command_actors(
         cmd_actors.append(actor)
 
         if i == 0:
-            rank_0_address = "localhost"
+            #rank_0_address = "localhost"
+            rank_0_address = os.getenv("MY_POD_IP")
             rank_0_port = 49782
         else:
             rank_0_address, rank_0_port = ray.get(
                 # pyre-ignore[16]
                 cmd_actors[0].get_actor_address_and_port.remote()
-            )
+            )        
         ray.get(actor.set_address_and_port.remote(rank_0_address, rank_0_port))
 
     return cmd_actors
