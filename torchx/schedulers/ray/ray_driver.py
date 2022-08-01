@@ -71,6 +71,7 @@ class CommandActor:  # pragma: no cover
 
     def get_actor_address_and_port(self) -> Tuple[str, int]:
         addr, port = get_address_and_port()
+        print("get_actor_address_and_port before: ", addr, port)
         addr = os.getenv("MY_POD_IP")
         print("get_actor_address_and_port: ", addr, port)
         return addr, 49782
