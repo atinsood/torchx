@@ -136,7 +136,6 @@ def create_command_actors(
             rank_0_address = os.getenv("MY_POD_IP")
             rank_0_port = 49782
             print(f'here and rank is {i} and {rank_0_address} {rank_0_port}')
-            actor.set_address_and_port(rank_0_address, rank_0_port)
         else:
             rank_0_address, rank_0_port = ray.get(
                 # pyre-ignore[16]
@@ -144,7 +143,9 @@ def create_command_actors(
             )   
             print(f'here and rank is {i} and {rank_0_address} {rank_0_port}')
             print(f"setting actor remote address and port {rank_0_address} {rank_0_port}") 
-            ray.get(actor.set_address_and_port.remote(rank_0_address, rank_0_port))
+        
+        print(f"finally setting actor remote address and port {rank_0_address} {rank_0_port}")         
+        ray.get(actor.set_address_and_port.remote(rank_0_address, rank_0_port))
 
     return cmd_actors
 
