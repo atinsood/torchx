@@ -71,16 +71,16 @@ class CommandActor:  # pragma: no cover
 
     def get_actor_address_and_port(self) -> Tuple[str, int]:
         addr, port = get_address_and_port()
-        print("get_actor_address_and_port: ", addr, port)
         addr = os.getenv("MY_POD_IP")
+        print("get_actor_address_and_port: ", addr, port)
         return addr, 49782
 
     def set_address_and_port(self, address: str, port: int) -> None:
         self.master_addr = address
         self.master_port = port
         print("set_address_and_port: ", address, port)
-        os.environ["MASTER_ADDR"] = address
-        os.environ["MASTER_PORT"] = str(port)
+        #os.environ["MASTER_ADDR"] = address
+        #os.environ["MASTER_PORT"] = str(port)
 
 
 def load_actor_json(filename: str) -> List[RayActor]:
@@ -138,7 +138,8 @@ def create_command_actors(
             rank_0_address, rank_0_port = ray.get(
                 # pyre-ignore[16]
                 cmd_actors[0].get_actor_address_and_port.remote()
-            )        
+            )   
+        print(f"setting actor remote address and port {rank_0_address} {rank_0_port}") 
         ray.get(actor.set_address_and_port.remote(rank_0_address, rank_0_port))
 
     return cmd_actors
