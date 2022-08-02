@@ -129,14 +129,14 @@ def ddp(
     else:
         raise ValueError("failed to compute role_name")
 
-    rdzv_backend = "c10d"
+    rdzv_backend = "static"
     if nnodes == 1:
         # using port 0 makes elastic chose a free random port which is ok
         # for single-node jobs since all workers run under a single agent
         rdzv_endpoint = "localhost:0"
     else:
         #rdzv_endpoint = _noquote(f"$${macros.rank0_env}:{rdzv_port}")
-        rdzv_endpoint = _noquote(f"$${macros.rank0_env}:49782")
+        rdzv_endpoint = _noquote(f"$${macros.rank0_env}:49783")
 
     #rdzv_endpoint = "etcd-service.codeflare.svc:2379"
 
@@ -160,7 +160,7 @@ def ddp(
         str(nnodes),
         "--nproc_per_node",
         str(nproc_per_node),
-        #"--node_rank", macros.replica_id,
+        "--node_rank", macros.replica_id,
         "--tee",
         "3",
         "--role",

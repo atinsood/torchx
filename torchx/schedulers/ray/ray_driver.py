@@ -54,7 +54,7 @@ class CommandActor:  # pragma: no cover
 
         #left, right = self.cmd[-1].split('$TORCHX_RANK0_HOST:29500')
         #replace TORCHX_RANK0_HOST for now
-        #self.cmd[-1] = "TORCH_DISTRIBUTED_DEBUG=DETAIL" + " MASTER_ADDR=" + str(self.master_addr) + " MASTER_PORT=" + str(self.master_port)+ " " +left + str(self.master_addr)+":49782" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
+        #self.cmd[-1] = "TORCH_DISTRIBUTED_DEBUG=DETAIL" + " MASTER_ADDR=" + str(self.master_addr) + " MASTER_PORT=" + str(self.master_port)+ " " +left + str(self.master_addr)+":49783" + " --master_addr " + str(self.master_addr) + " --master_port " + str(self.master_port) + right
 
         #self.cmd.append(" --master_addr " + self.master_addr)
         #self.cmd.append(" --master_port " + str(self.master_port))
@@ -74,7 +74,7 @@ class CommandActor:  # pragma: no cover
         print("get_actor_address_and_port before: ", addr, port)
         addr = os.getenv("MY_POD_IP")
         print("get_actor_address_and_port: ", addr, port)
-        return addr, 49782
+        return addr, 49783
 
     def set_address_and_port(self, address: str, port: int) -> None:
         self.master_addr = address
@@ -138,7 +138,7 @@ def create_command_actors(
                 # pyre-ignore[16]
                 cmd_actors[0].get_actor_address_and_port.remote()
             )
-            rank_0_port = 49782
+            rank_0_port = 49783
             print(f'here and rank is {i} and {rank_0_address} {rank_0_port}')
         else:
             rank_0_address, rank_0_port = ray.get(
