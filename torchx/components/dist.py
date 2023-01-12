@@ -133,7 +133,8 @@ def ddp(
     if nnodes == 1:
         # using port 0 makes elastic chose a free random port which is ok
         # for single-node jobs since all workers run under a single agent
-        rdzv_endpoint = "localhost:0"
+        #rdzv_endpoint = "localhost:0"
+        rdzv_endpoint = _noquote(f"$${macros.rank0_env}:49782")
     else:
         #rdzv_endpoint = _noquote(f"$${macros.rank0_env}:{rdzv_port}")
         rdzv_endpoint = _noquote(f"$${macros.rank0_env}:49782")
